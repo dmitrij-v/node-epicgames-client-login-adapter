@@ -53,6 +53,8 @@ class EpicGamesClientLoginAdapter {
     await page.goto('https://epicgames.com/id');
     const login = credentials.login || credentials.email || credentials.username;
     if (login && credentials.password) {
+      const tupeButton = await page.waitForSelector('#login-with-epic');
+      await tupeButton.click();
       const usernameOrEmailField = await page.waitForSelector('#usernameOrEmail');
       await usernameOrEmailField.type(login, { delay: options.inputDelay });
       const passwordField = await page.waitForSelector('#password');
